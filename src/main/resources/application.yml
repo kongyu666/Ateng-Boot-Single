@@ -1,0 +1,29 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 20420
+  error:
+    include-exception: true
+  servlet:
+    context-path: / # 应用服务根路径
+    encoding: # 设置默认编码
+      charset: utf-8
+      enabled: true
+      force: true
+# Spring配置
+spring:
+  application:
+    name: @project.name@
+  profiles:
+    active: @spring.profiles.active@
+    activeDesc: @spring.profiles.activeDesc@
+  mvc:
+    servlet:
+      load-on-startup: 100 # Servlet加载时的启动顺序
+  web:
+    resources:
+      add-mappings: true # 不要为我们工程中的资源文件建立映射
+  # 配置文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB

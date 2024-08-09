@@ -1,0 +1,182 @@
+spring:
+  # 切面启用
+  aop:
+    auto: true
+    proxy-target-class: true
+  boot:
+    admin:
+      client:
+        enabled: false # 关闭Spring Boot Admin
+  # SpringBoot3和JDK21 开启虚拟线程
+  threads:
+    virtual:
+      enabled: true
+  # 数据库的相关配置
+  datasource:
+    url: jdbc:postgresql://192.168.1.10:32297/ateng_boot?currentSchema=public&stringtype=unspecified  # 数据库连接URL
+    username: postgres  # 数据库用户名
+    password: Lingo@local_postgresql_5432  # 数据库密码
+    driver-class-name: org.postgresql.Driver  # PostgreSQL数据库驱动类
+    # driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL数据库驱动类
+    type: com.alibaba.druid.pool.DruidDataSource  # 使用Druid数据源
+    # Druid连接池配置 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    druid:
+      initial-size: 10  # 初始化连接池大小
+      min-idle: 10  # 最小空闲连接数
+      max-active: 100  # 最大活跃连接数
+      max-wait: 10000  # 获取连接的最大等待时间，单位毫秒
+  # 缓存Redis的相关配置
+  data:
+    redis:
+      host: 192.168.1.10
+      database: 81 # Redis数据库索引（默认为0）
+      port: 42784 # Redis服务器连接端口
+      password: Admin@123 # Redis服务器连接密码（默认为空）
+      client-type: lettuce  # 默认使用Lettuce作为Redis客户端
+      lettuce:
+        pool:
+          max-active: 100 # 连接池最大连接数（使用负值表示没有限制）
+          max-wait: -1s # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-idle: 100 # 连接池中的最大空闲连接
+          min-idle: 0 # 连接池最小空闲连接数
+          time-between-eviction-runs: 1s # 空闲对象逐出器线程的运行间隔时间.空闲连接线程释放周期时间
+      timeout: 10000ms # 连接超时时间（毫秒）
+    redis-dev:
+      host: 192.168.1.10 # Redis服务器地址
+      database: 82 # Redis数据库索引（默认为0）
+      port: 42784 # Redis服务器连接端口
+      password: Admin@123 # Redis服务器连接密码（默认为空）
+      client-type: lettuce  # 默认使用Lettuce作为Redis客户端
+      lettuce:
+        pool:
+          max-active: 100 # 连接池最大连接数（使用负值表示没有限制）
+          max-wait: -1s # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-idle: 100 # 连接池中的最大空闲连接
+          min-idle: 0 # 连接池最小空闲连接数
+          time-between-eviction-runs: 1s # 空闲对象逐出器线程的运行间隔时间.空闲连接线程释放周期时间
+      timeout: 10000ms # 连接超时时间（毫秒）
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+  file:
+    name: logs/@project.name@.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 3
+
+# Mybatis Flex的配置 https://mybatis-flex.com/zh/base/configuration.html
+mybatis-flex:
+  global-config:
+    print-banner: false
+
+############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+sa-token:
+  # token 名称（同时也是 cookie 名称）
+  token-name: satoken
+  # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  timeout: 2592000
+  # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+  active-timeout: -1
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+  # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+dromara:
+  x-file-storage: #文件存储配置
+    default-platform: minio-1 #默认使用的存储平台
+    thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
+    minio: # MinIO，由于 MinIO SDK 支持 AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
+      - platform: minio-1 # 存储平台标识
+        enable-storage: true  # 启用存储
+        access-key: admin
+        secret-key: Admin@123
+        end-point: "http://dev.minio.lingo.local"
+        bucket-name: lx-facility
+        domain: "http://dev.minio.lingo.local/lx-facility/" # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
+        base-path: file/ # 基础路径
+
+# HTTP 请求配置
+forest:
+  backend: okhttp3             # 后端HTTP框架（默认为 okhttp3）
+  max-connections: 1000        # 连接池最大连接数（默认为 500）
+  max-route-connections: 500   # 每个路由的最大连接数（默认为 500）
+  max-request-queue-size: 100  # [自v1.5.22版本起可用] 最大请求等待队列大小
+  max-async-thread-size: 300   # [自v1.5.21版本起可用] 最大异步线程数
+  max-async-queue-size: 16     # [自v1.5.22版本起可用] 最大异步线程池队列大小
+  timeout: 3000                # [已不推荐使用] 请求超时时间，单位为毫秒（默认为 3000）
+  connect-timeout: 3000        # 连接超时时间，单位为毫秒（默认为 timeout）
+  read-timeout: 3000           # 数据读取超时时间，单位为毫秒（默认为 timeout）
+  max-retry-count: 3           # 请求失败后重试次数（默认为 0 次不重试）
+  ssl-protocol: TLS            # 单向验证的HTTPS的默认TLS协议（默认为 TLS）
+  log-enabled: false           # 打开或关闭日志（默认为 true）
+  log-request: true            # 打开/关闭Forest请求日志（默认为 true）
+  log-response-status: true    # 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-content: false   # 打开/关闭Forest响应内容日志（默认为 false）
+  async-mode: platform         # [自v1.5.27版本起可用] 异步模式（默认为 platform）
+
+# 统一返回配置
+graceful-response:
+  # 是否打印异常日志，默认为false
+  print-exception-in-global-advice: true
+  # Response风格，不配置默认为0
+  response-style: 1
+  # 自定义的成功响应码，不配置则为0
+  default-success-code: 0
+  # 自定义的成功提示，默认为ok
+  default-success-msg: "请求成功"
+  # 自定义的失败响应码，默认为1
+  default-error-code: -1
+  # 自定义的失败提示，默认为error
+  default-error-msg: "服务器异常, 请稍后再试"
+  # 自定义Response格式
+  response-class-full-name: local.ateng.boot.common.config.gracefulResponse.CustomResponseImpl
+  # 使用FastJsonHttpMessageConverter进行JSON序列化
+  json-http-message-converter: com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter
+  # 例外请求放行
+  exclude-packages:
+    - org.springframework.boot.*
+  # 根据返回值类型进行放行
+  exclude-return-types:
+    - cn.dev33.satoken.util.SaResult
+    - local.ateng.boot.common.utils.Result
+
+# Actuator 监控端点的配置项
+management:
+  endpoints: # 配置Actuator端点的管理
+    web:
+      exposure: # 暴露端点
+        include: 'health,shutdown'  # 包含所有端点，可以根据需要更改为具体的端点列表
+  endpoint: # 配置各个端点的行为
+    shutdown: # 关闭端点配置
+      enabled: true # 启用shutdown端点，允许通过POST请求关闭应用程序
+    health: # 健康检查端点配置
+      #show-details: always # 显示完整的健康信息，包括详细的检查项
+      show-details: never # 显示简短的健康信息
+
+# Snail Job
+snail-job:
+  server:
+    host: 192.168.1.10 # 服务端的地址
+    port: 32782 # 服务端netty的端口号
+  #host: 127.0.0.1 # 指定客户端IP，不配置则取本地IP
+  port: 20531 # 指定客户端端口，不配置则默认1789
+  namespace: cfa4aaadbf364ccfb401dfb54f715317 # 名称空间ID
+  token: SJ_Wyz3dmsdbDOkDujOTSSoBjGQP1BMsVnj # 令牌
+  mail:
+    enabled: false
+  dispatcherThreadPool: # 调度线程池配置
+    corePoolSize: 16
+    maximumPoolSize: 16
+    keepAliveTime: 1
+    timeUnit: SECONDS
+    queueCapacity: 10000
+
