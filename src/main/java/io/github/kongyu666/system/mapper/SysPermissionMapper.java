@@ -1,7 +1,7 @@
-package local.ateng.boot.system.mapper;
+package io.github.kongyu666.system.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import local.ateng.boot.system.entity.SysPermission;
+import io.github.kongyu666.system.entity.SysPermission;
 
 /**
  * 存储系统中的权限信息 映射层。

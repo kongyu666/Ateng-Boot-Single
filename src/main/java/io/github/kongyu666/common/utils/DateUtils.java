@@ -1,4 +1,4 @@
-package local.ateng.boot.common.utils;
+package io.github.kongyu666.common.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

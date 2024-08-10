@@ -1,4 +1,4 @@
-package local.ateng.boot.system.entity;
+package io.github.kongyu666.system.entity;
 
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.Table;

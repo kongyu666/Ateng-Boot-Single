@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.spring;
+package io.github.kongyu666.common.config.spring;
 
 import com.alibaba.fastjson2.JSONReader;
 import com.alibaba.fastjson2.JSONWriter;
@@ -22,8 +22,7 @@ import java.util.List;
  * @since 2024-02-05 15:06
  */
 @Configuration
-//@EnableWebMvc
-public class MyWebMvcConfigurer implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * Fastjson2转换器配置
      *

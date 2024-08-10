@@ -1,7 +1,7 @@
-package local.ateng.boot.system.mapper;
+package io.github.kongyu666.system.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import local.ateng.boot.system.entity.SysUser;
+import io.github.kongyu666.system.entity.SysUser;
 
 /**
  * 存储用户的基本信息 映射层。

@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.snailjob;
+package io.github.kongyu666.common.config.snailjob;
 
 import com.aizuda.snailjob.client.starter.EnableSnailJob;
 import org.springframework.context.annotation.Configuration;

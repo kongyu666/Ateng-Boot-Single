@@ -1,7 +1,7 @@
-package local.ateng.boot.system.service;
+package io.github.kongyu666.system.service;
 
 import com.mybatisflex.core.service.IService;
-import local.ateng.boot.system.entity.SysRolePermission;
+import io.github.kongyu666.system.entity.SysRolePermission;
 
 import java.util.List;
 

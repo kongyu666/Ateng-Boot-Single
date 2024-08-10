@@ -1,4 +1,4 @@
-package local.ateng.boot.system.entity;
+package io.github.kongyu666.system.entity;
 
 import com.mybatisflex.annotation.ColumnMask;
 import com.mybatisflex.annotation.Id;
@@ -9,9 +9,9 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import local.ateng.boot.common.validation.AddGroup;
-import local.ateng.boot.common.validation.UpdateGroup;
-import local.ateng.boot.common.xss.Xss;
+import io.github.kongyu666.common.validation.AddGroup;
+import io.github.kongyu666.common.validation.UpdateGroup;
+import io.github.kongyu666.common.xss.Xss;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

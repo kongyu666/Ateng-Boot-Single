@@ -1,4 +1,4 @@
-package local.ateng.boot.common.xss;
+package io.github.kongyu666.common.xss;
 
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HtmlUtil;

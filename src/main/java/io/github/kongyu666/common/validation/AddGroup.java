@@ -1,4 +1,4 @@
-package local.ateng.boot.common.validation;
+package io.github.kongyu666.common.validation;
 
 /**
  * 校验分组 add

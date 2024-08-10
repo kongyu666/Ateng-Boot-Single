@@ -1,9 +1,9 @@
-package local.ateng.boot.system.service.impl;
+package io.github.kongyu666.system.service.impl;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import local.ateng.boot.system.entity.SysRole;
-import local.ateng.boot.system.mapper.SysRoleMapper;
-import local.ateng.boot.system.service.SysRoleService;
+import io.github.kongyu666.system.entity.SysRole;
+import io.github.kongyu666.system.mapper.SysRoleMapper;
+import io.github.kongyu666.system.service.SysRoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

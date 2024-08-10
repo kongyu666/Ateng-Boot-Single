@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.mybatisFlex;
+package io.github.kongyu666.common.config.mybatisFlex;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.mybatisflex.codegen.Generator;
@@ -42,7 +42,7 @@ public class MybatisFlexGenerator {
         //设置代码路径和根包
         globalConfig.getPackageConfig()
                 .setSourceDir(System.getProperty("user.dir") + "/src/main/java")
-                .setBasePackage("local.ateng.boot.system");
+                .setBasePackage("io.github.kongyu666.system");
         //.setMapperXmlPath(System.getProperty("user.dir") + "/src/main/resources/mapper");
 
         // 设置生成 Entity 并启用 Lombok

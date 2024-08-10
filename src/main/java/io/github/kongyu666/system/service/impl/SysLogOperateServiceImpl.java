@@ -1,9 +1,9 @@
-package local.ateng.boot.system.service.impl;
+package io.github.kongyu666.system.service.impl;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import local.ateng.boot.system.entity.SysLogOperate;
-import local.ateng.boot.system.mapper.SysLogOperateMapper;
-import local.ateng.boot.system.service.SysLogOperateService;
+import io.github.kongyu666.system.entity.SysLogOperate;
+import io.github.kongyu666.system.mapper.SysLogOperateMapper;
+import io.github.kongyu666.system.service.SysLogOperateService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

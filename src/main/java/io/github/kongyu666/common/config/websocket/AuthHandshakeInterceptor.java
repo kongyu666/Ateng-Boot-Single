@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.websocket;
+package io.github.kongyu666.common.config.websocket;
 
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.http.HttpStatus;

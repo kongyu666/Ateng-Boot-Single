@@ -76,9 +76,9 @@ mybatis-flex:
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
   # token 名称（同时也是 cookie 名称）
-  token-name: satoken
+  token-name: token
   # token 有效期（单位：秒） 默认30天，-1 代表永久有效
-  timeout: 2592000
+  timeout: -1
   # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
   active-timeout: -1
   # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
@@ -122,32 +122,6 @@ forest:
   log-response-status: true    # 打开/关闭Forest响应状态日志（默认为 true）
   log-response-content: false   # 打开/关闭Forest响应内容日志（默认为 false）
   async-mode: platform         # [自v1.5.27版本起可用] 异步模式（默认为 platform）
-
-# 统一返回配置
-graceful-response:
-  # 是否打印异常日志，默认为false
-  print-exception-in-global-advice: true
-  # Response风格，不配置默认为0
-  response-style: 1
-  # 自定义的成功响应码，不配置则为0
-  default-success-code: 0
-  # 自定义的成功提示，默认为ok
-  default-success-msg: "请求成功"
-  # 自定义的失败响应码，默认为1
-  default-error-code: -1
-  # 自定义的失败提示，默认为error
-  default-error-msg: "服务器异常, 请稍后再试"
-  # 自定义Response格式
-  response-class-full-name: local.ateng.boot.common.config.gracefulResponse.CustomResponseImpl
-  # 使用FastJsonHttpMessageConverter进行JSON序列化
-  json-http-message-converter: com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter
-  # 例外请求放行
-  exclude-packages:
-    - org.springframework.boot.*
-  # 根据返回值类型进行放行
-  exclude-return-types:
-    - cn.dev33.satoken.util.SaResult
-    - local.ateng.boot.common.utils.Result
 
 # Actuator 监控端点的配置项
 management:

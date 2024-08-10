@@ -1,7 +1,7 @@
-package local.ateng.boot.common.utils;
+package io.github.kongyu666.common.utils;
 
+import io.github.kongyu666.common.enums.DeviceType;
 import jakarta.servlet.http.HttpServletRequest;
-import local.ateng.boot.common.enums.DeviceType;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

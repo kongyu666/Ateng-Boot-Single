@@ -34,6 +34,5 @@
 
 - **[Hutool](https://www.hutool.cn/docs/#/)**: Java工具类库，提供了丰富的工具方法，简化了常见开发任务的实现，如文件操作、日期处理等。
 - **[Fastjson2](https://github.com/alibaba/fastjson2/wiki/fastjson2_intro_cn)**: 高性能的JSON处理库，支持快速的JSON序列化和反序列化操作，适合需要高效JSON处理的场景。
-- **[Graceful Response](https://github.com/feiniaojin/graceful-response)**: 用于处理HTTP响应的工具，提供了优雅的异常处理和统一的响应格式。
 - **[EasyExcel](https://easyexcel.opensource.alibaba.com/docs/current/)**: 高效的Excel处理工具，支持大规模数据的读写操作，提供了简单易用的API。
 - **[Mapstruct Plus](https://www.mapstruct.plus/)**: 通过注解生成Java Bean之间的映射代码，简化了对象转换的过程，提高了开发效率。

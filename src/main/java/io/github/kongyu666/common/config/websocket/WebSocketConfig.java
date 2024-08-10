@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.websocket;
+package io.github.kongyu666.common.config.websocket;
 
 import com.alibaba.fastjson2.support.spring6.websocket.sockjs.FastjsonSockJsMessageCodec;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package local.ateng.boot.system.vo;
+package io.github.kongyu666.system.vo;
 
 import com.mybatisflex.annotation.Table;
 import lombok.AllArgsConstructor;

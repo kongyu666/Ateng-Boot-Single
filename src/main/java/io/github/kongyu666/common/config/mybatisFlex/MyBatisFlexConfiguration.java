@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.mybatisFlex;
+package io.github.kongyu666.common.config.mybatisFlex;
 
 import com.mybatisflex.core.audit.AuditManager;
 import org.mybatis.spring.annotation.MapperScan;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScans({@MapperScan("local.ateng.boot.**.mapper")})
+@MapperScans({@MapperScan("io.github.kongyu666.**.mapper")})
 public class MyBatisFlexConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger("mybatis-flex-sql");

@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.websocket;
+package io.github.kongyu666.common.config.websocket;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;

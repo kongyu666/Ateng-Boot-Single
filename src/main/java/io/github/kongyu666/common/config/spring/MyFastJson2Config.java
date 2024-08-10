@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.spring;
+package io.github.kongyu666.common.config.spring;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;

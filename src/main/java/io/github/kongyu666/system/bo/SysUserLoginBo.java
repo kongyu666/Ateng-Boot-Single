@@ -1,8 +1,8 @@
-package local.ateng.boot.system.bo;
+package io.github.kongyu666.system.bo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import local.ateng.boot.common.xss.Xss;
+import io.github.kongyu666.common.xss.Xss;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

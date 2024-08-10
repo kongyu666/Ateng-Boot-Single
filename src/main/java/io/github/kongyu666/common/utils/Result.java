@@ -1,7 +1,7 @@
-package local.ateng.boot.common.utils;
+package io.github.kongyu666.common.utils;
 
 import com.alibaba.fastjson2.JSON;
-import local.ateng.boot.common.enums.AppCodeEnum;
+import io.github.kongyu666.common.enums.AppCodeEnum;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -45,9 +45,30 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * 静态方法，返回一个带自定义状态码和自定义提示信息的错误结果
+     */
+    public static Result error(String msg) {
+        return error(AppCodeEnum.ERROR.getCode(), msg);
+    }
+
+    /**
+     * 静态方法，返回一个默认的成功结果
+     */
+    public static Result success() {
+        return new Result();
+    }
+
+    /**
+     * 静态方法，返回一个带自定义状态码和自定义提示信息的成功结果
+     */
+    public static Result success(String msg) {
+        return success(AppCodeEnum.SUCCESS.getCode(), msg);
+    }
+
+    /**
      * 静态方法，返回一个带自定义状态码和提示信息的成功结果
      */
-    public static Result ok(String code, String msg) {
+    public static Result success(String code, String msg) {
         Result r = new Result();
         r.setCode(code);
         r.setMsg(msg);
@@ -55,16 +76,9 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 静态方法，返回一个默认的成功结果
-     */
-    public static Result ok() {
-        return new Result();
-    }
-
-    /**
      * 静态方法，返回一个包含指定数据的成功结果
      */
-    public static <T> Result<T> ok(T data) {
+    public static <T> Result<T> success(T data) {
         Result<T> r = new Result<>();
         r.setData(data);
         return r;

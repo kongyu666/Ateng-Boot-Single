@@ -1,11 +1,11 @@
-package local.ateng.boot.system.service;
+package io.github.kongyu666.system.service;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
-import local.ateng.boot.system.bo.SysUserLoginBo;
-import local.ateng.boot.system.bo.SysUserPageBo;
-import local.ateng.boot.system.entity.SysUser;
-import local.ateng.boot.system.vo.SysUserVo;
+import io.github.kongyu666.system.bo.SysUserLoginBo;
+import io.github.kongyu666.system.bo.SysUserPageBo;
+import io.github.kongyu666.system.entity.SysUser;
+import io.github.kongyu666.system.vo.SysUserVo;
 
 import java.util.List;
 
@@ -38,6 +38,4 @@ public interface SysUserService extends IService<SysUser> {
     // 根据用户id查询权限列表
     List<String> getUserPermissionName(Integer id);
 
-    // 任务重试测试
-    void userRetry();
 }

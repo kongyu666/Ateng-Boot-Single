@@ -1,9 +1,11 @@
-package local.ateng.boot.common.utils;
+package io.github.kongyu666.common.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.boot.autoconfigure.thread.Threading;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -57,6 +59,10 @@ public final class SpringUtils extends SpringUtil {
      */
     public static ApplicationContext context() {
         return getApplicationContext();
+    }
+
+    public static boolean isVirtual() {
+        return Threading.VIRTUAL.isActive(getBean(Environment.class));
     }
 
 }

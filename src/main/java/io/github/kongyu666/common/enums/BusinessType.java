@@ -1,4 +1,4 @@
-package local.ateng.boot.common.enums;
+package io.github.kongyu666.common.enums;
 
 /**
  * 业务操作类型

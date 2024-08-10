@@ -1,4 +1,4 @@
-package local.ateng.boot.common.enums;
+package io.github.kongyu666.common.enums;
 
 public enum AppCodeEnum {
     // 常用 Request successful failed

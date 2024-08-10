@@ -1,7 +1,7 @@
-package local.ateng.boot.system.mapper;
+package io.github.kongyu666.system.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import local.ateng.boot.system.entity.SysLogOperate;
+import io.github.kongyu666.system.entity.SysLogOperate;
 
 /**
  * 操作日志记录 映射层。

@@ -1,38 +1,36 @@
-package local.ateng.boot.system.service.impl;
+package io.github.kongyu666.system.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.BCrypt;
-import com.aizuda.snailjob.client.core.annotation.Retryable;
-import com.feiniaojin.gracefulresponse.GracefulResponse;
 import com.mybatisflex.core.mask.MaskManager;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import local.ateng.boot.common.enums.AppCodeEnum;
-import local.ateng.boot.common.utils.SaTokenUtils;
-import local.ateng.boot.system.bo.SysUserLoginBo;
-import local.ateng.boot.system.bo.SysUserPageBo;
-import local.ateng.boot.system.entity.SysUser;
-import local.ateng.boot.system.entity.SysUserRole;
-import local.ateng.boot.system.mapper.SysUserMapper;
-import local.ateng.boot.system.service.SysRoleService;
-import local.ateng.boot.system.service.SysUserRoleService;
-import local.ateng.boot.system.service.SysUserService;
-import local.ateng.boot.system.vo.SysUserVo;
+import io.github.kongyu666.common.enums.AppCodeEnum;
+import io.github.kongyu666.common.exception.ServiceException;
+import io.github.kongyu666.common.utils.SaTokenUtils;
+import io.github.kongyu666.system.bo.SysUserLoginBo;
+import io.github.kongyu666.system.bo.SysUserPageBo;
+import io.github.kongyu666.system.entity.SysUser;
+import io.github.kongyu666.system.entity.SysUserRole;
+import io.github.kongyu666.system.mapper.SysUserMapper;
+import io.github.kongyu666.system.service.SysRoleService;
+import io.github.kongyu666.system.service.SysUserRoleService;
+import io.github.kongyu666.system.service.SysUserService;
+import io.github.kongyu666.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
-import static local.ateng.boot.system.entity.table.SysPermissionTableDef.SYS_PERMISSION;
-import static local.ateng.boot.system.entity.table.SysRolePermissionTableDef.SYS_ROLE_PERMISSION;
-import static local.ateng.boot.system.entity.table.SysRoleTableDef.SYS_ROLE;
-import static local.ateng.boot.system.entity.table.SysUserRoleTableDef.SYS_USER_ROLE;
-import static local.ateng.boot.system.entity.table.SysUserTableDef.SYS_USER;
+import static io.github.kongyu666.system.entity.table.SysPermissionTableDef.SYS_PERMISSION;
+import static io.github.kongyu666.system.entity.table.SysRolePermissionTableDef.SYS_ROLE_PERMISSION;
+import static io.github.kongyu666.system.entity.table.SysRoleTableDef.SYS_ROLE;
+import static io.github.kongyu666.system.entity.table.SysUserRoleTableDef.SYS_USER_ROLE;
+import static io.github.kongyu666.system.entity.table.SysUserTableDef.SYS_USER;
 
 /**
  * 存储用户的基本信息 服务层实现。
@@ -65,10 +63,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             MaskManager.restoreMask();
         }
         // 判断用户是否存在
-        GracefulResponse.wrapAssert(AppCodeEnum.AUTH_USER_NOT_FOUND.getCode(), () -> Assert.isTrue(!ObjectUtils.isEmpty(user), AppCodeEnum.AUTH_USER_NOT_FOUND.getDescription()));
+        cn.hutool.core.lang.Assert.isTrue(!ObjectUtils.isEmpty(user), () -> new ServiceException(AppCodeEnum.AUTH_USER_NOT_FOUND.getCode(), AppCodeEnum.AUTH_USER_NOT_FOUND.getDescription()));
         // 校验密码
         boolean checkpw = BCrypt.checkpw(password, user.getPassword());
-        GracefulResponse.wrapAssert(AppCodeEnum.AUTH_PASSWORD_INCORRECT.getCode(), () -> Assert.isTrue(checkpw, AppCodeEnum.AUTH_PASSWORD_INCORRECT.getDescription()));
+        cn.hutool.core.lang.Assert.isTrue(checkpw, () -> new ServiceException(AppCodeEnum.AUTH_PASSWORD_INCORRECT.getCode(), AppCodeEnum.AUTH_PASSWORD_INCORRECT.getDescription()));
         // 登录用户
         SysUserVo loginUser = SaTokenUtils.login(user);
         // 返回用户信息
@@ -86,7 +84,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .where(SYS_USER.USER_NAME.eq(userName))
                 .one();
         // 判断用户是否存在
-        GracefulResponse.wrapAssert(AppCodeEnum.AUTH_USER_ALREADY_EXISTS.getCode(), () -> Assert.isTrue(ObjectUtils.isEmpty(user), AppCodeEnum.AUTH_USER_ALREADY_EXISTS.getDescription()));
+        cn.hutool.core.lang.Assert.isTrue(ObjectUtils.isEmpty(user), () -> new ServiceException(AppCodeEnum.AUTH_USER_ALREADY_EXISTS.getCode(), AppCodeEnum.AUTH_USER_ALREADY_EXISTS.getDescription()));
         // 新增用户
         String passwordEncrypt = BCrypt.hashpw(password);
         entity.setPassword(passwordEncrypt);
@@ -124,8 +122,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String password = entity.getPassword();
         SysUser user = this.getById(entity.getUserId());
         // 判断用户是否存在
-        GracefulResponse.wrapAssert(AppCodeEnum.AUTH_USER_NOT_FOUND.getCode(), () -> Assert.isTrue(!ObjectUtils.isEmpty(user), AppCodeEnum.AUTH_USER_NOT_FOUND.getDescription()));
-        GracefulResponse.wrapAssert(AppCodeEnum.AUTH_USER_NOT_INCONSISTENT.getCode(), () -> Assert.isTrue(user.getUserName().equals(userName), AppCodeEnum.AUTH_USER_NOT_INCONSISTENT.getDescription()));
+        cn.hutool.core.lang.Assert.isTrue(!ObjectUtils.isEmpty(user), () -> new ServiceException(AppCodeEnum.AUTH_USER_NOT_FOUND.getCode(), AppCodeEnum.AUTH_USER_NOT_FOUND.getDescription()));
+        cn.hutool.core.lang.Assert.isTrue(user.getUserName().equals(userName), () -> new ServiceException(AppCodeEnum.AUTH_USER_NOT_INCONSISTENT.getCode(), AppCodeEnum.AUTH_USER_NOT_INCONSISTENT.getDescription()));
         // 更新用户
         String passwordEncrypt = BCrypt.hashpw(password);
         entity.setPassword(passwordEncrypt);
@@ -169,11 +167,4 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return list;
     }
 
-    @Override
-    // 这个函数里面我们设置重试次数为4，每次间隔10s
-    @Retryable(scene = "userRetry", localTimes = 4, localInterval = 10)
-    public void userRetry() {
-        log.info("local retry 方法开始执行");
-        double i = 1 / 0;
-    }
 }

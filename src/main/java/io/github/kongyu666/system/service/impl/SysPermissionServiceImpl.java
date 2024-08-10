@@ -1,9 +1,9 @@
-package local.ateng.boot.system.service.impl;
+package io.github.kongyu666.system.service.impl;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import local.ateng.boot.system.entity.SysPermission;
-import local.ateng.boot.system.mapper.SysPermissionMapper;
-import local.ateng.boot.system.service.SysPermissionService;
+import io.github.kongyu666.system.entity.SysPermission;
+import io.github.kongyu666.system.mapper.SysPermissionMapper;
+import io.github.kongyu666.system.service.SysPermissionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

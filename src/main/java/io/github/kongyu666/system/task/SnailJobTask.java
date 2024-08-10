@@ -1,4 +1,4 @@
-package local.ateng.boot.system.task;
+package io.github.kongyu666.system.task;
 
 import com.aizuda.snailjob.client.job.core.annotation.JobExecutor;
 import com.aizuda.snailjob.client.job.core.dto.JobArgs;

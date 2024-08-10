@@ -1,4 +1,4 @@
-package local.ateng.boot.system.bo;
+package io.github.kongyu666.system.bo;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package local.ateng.boot.system.controller;
+package io.github.kongyu666.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
@@ -7,18 +7,20 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.paginate.Page;
+import io.github.kongyu666.common.annotation.Log;
+import io.github.kongyu666.common.enums.BusinessType;
+import io.github.kongyu666.common.utils.Result;
+import io.github.kongyu666.common.utils.SaTokenUtils;
+import io.github.kongyu666.common.validation.AddGroup;
+import io.github.kongyu666.common.validation.UpdateGroup;
+import io.github.kongyu666.system.bo.SysUserLoginBo;
+import io.github.kongyu666.system.bo.SysUserPageBo;
+import io.github.kongyu666.system.entity.SysUser;
+import io.github.kongyu666.system.service.SysUserService;
+import io.github.kongyu666.system.vo.SysUserVo;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import local.ateng.boot.common.annotation.Log;
-import local.ateng.boot.common.enums.BusinessType;
-import local.ateng.boot.common.validation.AddGroup;
-import local.ateng.boot.common.validation.UpdateGroup;
-import local.ateng.boot.system.bo.SysUserLoginBo;
-import local.ateng.boot.system.bo.SysUserPageBo;
-import local.ateng.boot.system.entity.SysUser;
-import local.ateng.boot.system.service.SysUserService;
-import local.ateng.boot.system.vo.SysUserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +53,18 @@ public class SysUserController {
      */
     @SaIgnore
     @PostMapping("/login")
-    public SysUserVo login(@Validated @RequestBody SysUserLoginBo bo) {
-        return sysUserService.loginUser(bo);
+    public Result login(@Validated @RequestBody SysUserLoginBo bo) {
+        SysUserVo sysUserVo = sysUserService.loginUser(bo);
+        return Result.success(sysUserVo);
     }
 
     /**
      * 退出登录
      */
     @GetMapping("/logout")
-    public void logout() {
+    public Result logout() {
         StpUtil.logout();
+        return Result.success();
     }
 
     /**
@@ -70,8 +74,9 @@ public class SysUserController {
     @SaCheckRole("admin")
     @SaCheckPermission("system.user.add")
     @PostMapping("/add")
-    public void add(@Validated(AddGroup.class) @RequestBody SysUser entity) {
+    public Result add(@Validated(AddGroup.class) @RequestBody SysUser entity) {
         sysUserService.addUser(entity);
+        return Result.success();
     }
 
     /**
@@ -79,8 +84,9 @@ public class SysUserController {
      */
     @SaCheckPermission(value = "system.user.get", orRole = "admin")
     @GetMapping("/list")
-    public List<SysUser> list() {
-        return sysUserService.list();
+    public Result list() {
+        List<SysUser> list = sysUserService.list();
+        return Result.success(list);
     }
 
     /**
@@ -88,8 +94,9 @@ public class SysUserController {
      */
     @SaCheckPermission(value = "system.user.get", orRole = "admin")
     @PostMapping("/page")
-    public Page<SysUser> page(@Validated @RequestBody SysUserPageBo bo) {
-        return sysUserService.pageUser(bo);
+    public Result page(@Validated @RequestBody SysUserPageBo bo) {
+        Page<SysUser> sysUserPage = sysUserService.pageUser(bo);
+        return Result.success(sysUserPage);
     }
 
     /**
@@ -99,12 +106,13 @@ public class SysUserController {
     @SaCheckRole("admin")
     @SaCheckPermission("system.user.delete")
     @PostMapping("/delete-batch")
-    public void deleteBatch(
+    public Result deleteBatch(
             @Validated @RequestBody
             @Size(min = 1, message = "id列表不能为空")
             List<Long> ids
     ) {
         sysUserService.deleteBatchUser(ids);
+        return Result.success();
     }
 
     /**
@@ -114,8 +122,9 @@ public class SysUserController {
     @SaCheckRole("admin")
     @SaCheckPermission("system.user.update")
     @PostMapping("/update")
-    public void update(@Validated(UpdateGroup.class) @RequestBody SysUser entity) {
+    public Result update(@Validated(UpdateGroup.class) @RequestBody SysUser entity) {
         sysUserService.updateUser(entity);
+        return Result.success();
     }
 
     /**
@@ -123,30 +132,40 @@ public class SysUserController {
      */
     @SaCheckPermission(value = "system.user.get", orRole = "admin")
     @GetMapping("/get")
-    public SysUser get(
+    public Result get(
             @NotNull(message = "id不能为空")
             @Min(value = 1, message = "id不正确")
             Integer id
     ) {
-        return sysUserService.getById(id);
+        SysUser sysUser = sysUserService.getById(id);
+        return Result.success(sysUser);
     }
 
     /**
      * 获取账号权限
      */
     @GetMapping("/get-permission-list")
-    public List<String> getPermissionList() {
+    public Result getPermissionList() {
         List<String> permissionList = StpUtil.getPermissionList();
-        return permissionList;
+        return Result.success(permissionList);
     }
 
     /**
      * 获取账号角色
      */
     @GetMapping("/get-role-list")
-    public List<String> getRoleList() {
+    public Result getRoleList() {
         List<String> roleList = StpUtil.getRoleList();
-        return roleList;
+        return Result.success(roleList);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    @GetMapping("/user-info")
+    public Result getUserInfo() {
+        SysUserVo sysUserVo = SaTokenUtils.getSysUserVo();
+        return Result.success(sysUserVo);
     }
 
     /**
@@ -161,12 +180,6 @@ public class SysUserController {
         log.info("客户端发送了一条消息: {}", message);
         messagingTemplate.convertAndSend("/topic/greetings", StrUtil.format("服务端定时发送了一条数据：{}", DateUtil.now()));
         return "Hello, " + message + "!";
-    }
-
-    @GetMapping("/user-retry")
-    @SaIgnore
-    public void userRetry() {
-        sysUserService.userRetry();
     }
 
 }

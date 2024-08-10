@@ -1,12 +1,12 @@
-package local.ateng.boot.common.config.satoken;
+package io.github.kongyu666.common.config.satoken;
 
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.httpauth.basic.SaHttpBasicUtil;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
-import local.ateng.boot.common.enums.AppCodeEnum;
-import local.ateng.boot.common.utils.Result;
+import io.github.kongyu666.common.enums.AppCodeEnum;
+import io.github.kongyu666.common.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

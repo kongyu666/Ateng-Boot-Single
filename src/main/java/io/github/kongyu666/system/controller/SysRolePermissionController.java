@@ -1,10 +1,11 @@
-package local.ateng.boot.system.controller;
+package io.github.kongyu666.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
-import local.ateng.boot.common.annotation.Log;
-import local.ateng.boot.common.enums.BusinessType;
-import local.ateng.boot.system.entity.SysRolePermission;
-import local.ateng.boot.system.service.SysRolePermissionService;
+import io.github.kongyu666.common.annotation.Log;
+import io.github.kongyu666.common.enums.BusinessType;
+import io.github.kongyu666.common.utils.Result;
+import io.github.kongyu666.system.entity.SysRolePermission;
+import io.github.kongyu666.system.service.SysRolePermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -32,23 +33,26 @@ public class SysRolePermissionController {
      */
     @Log(module = "角色权限设置", desc = "新增角色权限", type = BusinessType.ADD)
     @PostMapping("/add")
-    public void add(@RequestBody SysRolePermission entity) {
+    public Result add(@RequestBody SysRolePermission entity) {
         sysRolePermissionService.addRolePermission(entity);
+        return Result.success();
     }
 
     /**
      * 查看列表
      */
     @GetMapping("/list")
-    public List<SysRolePermission> list() {
-        return sysRolePermissionService.listRolePermission();
+    public Result list() {
+        List<SysRolePermission> list = sysRolePermissionService.listRolePermission();
+        return Result.success(list);
     }
 
     /**
      * 查看单个
      */
     @GetMapping("/get")
-    public SysRolePermission get(Integer id) {
-        return sysRolePermissionService.getRolePermission(id);
+    public Result get(Integer id) {
+        SysRolePermission rolePermission = sysRolePermissionService.getRolePermission(id);
+        return Result.success(rolePermission);
     }
 }

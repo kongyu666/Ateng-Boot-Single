@@ -1,4 +1,4 @@
-package local.ateng.boot.common.constant;
+package io.github.kongyu666.common.constant;
 
 /**
  * 缓存的key 常量

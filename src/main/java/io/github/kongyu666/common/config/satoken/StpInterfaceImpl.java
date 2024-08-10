@@ -1,10 +1,10 @@
-package local.ateng.boot.common.config.satoken;
+package io.github.kongyu666.common.config.satoken;
 
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
-import local.ateng.boot.system.service.SysUserService;
+import io.github.kongyu666.system.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.redis;
+package io.github.kongyu666.common.config.redis;
 
 import lombok.Data;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

@@ -1,4 +1,4 @@
-package local.ateng.boot.common.config.spring;
+package io.github.kongyu666.common.config.spring;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

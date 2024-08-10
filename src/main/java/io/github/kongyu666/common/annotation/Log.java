@@ -1,7 +1,7 @@
-package local.ateng.boot.common.annotation;
+package io.github.kongyu666.common.annotation;
 
 
-import local.ateng.boot.common.enums.BusinessType;
+import io.github.kongyu666.common.enums.BusinessType;
 
 import java.lang.annotation.*;
 
