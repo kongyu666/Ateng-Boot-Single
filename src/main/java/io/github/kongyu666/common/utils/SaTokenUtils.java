@@ -48,7 +48,7 @@ public class SaTokenUtils {
         sysUserVo.setPassword("******");
         sysUserVo.setRoleList(roleList);
         sysUserVo.setPermissionList(permissionList);
-        sysUserVo.setSatoken(tokenValue);
+        sysUserVo.setToken(tokenValue);
         SaSession session = StpUtil.getSession();
         session.set(LOGIN_USER_KEY, sysUserVo);
         return sysUserVo;

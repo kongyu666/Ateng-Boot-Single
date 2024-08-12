@@ -39,7 +39,7 @@ public class SysUserVo implements Serializable {
     /**
      * token
      */
-    private String satoken;
+    private String token;
     /**
      * 菜单权限
      */

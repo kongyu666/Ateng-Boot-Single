@@ -6,7 +6,7 @@
 
     <!-- 项目坐标 -->
     <groupId>io.github.kongyu666</groupId>
-    <artifactId>Ateng-Boot-Single</artifactId>
+    <artifactId>ateng-boot-single</artifactId>
     <version>${revision}</version>
 
     <name>Ateng-Boot-Single</name>
