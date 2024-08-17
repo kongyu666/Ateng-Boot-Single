@@ -12,7 +12,7 @@ server:
 # Spring配置
 spring:
   application:
-    name: @project.name@
+    name: ${project.artifactId}
   profiles:
     active: @spring.profiles.active@
     activeDesc: @spring.profiles.activeDesc@
