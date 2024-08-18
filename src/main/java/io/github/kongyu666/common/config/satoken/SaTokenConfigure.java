@@ -3,13 +3,11 @@ package io.github.kongyu666.common.config.satoken;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.httpauth.basic.SaHttpBasicUtil;
 import cn.dev33.satoken.interceptor.SaInterceptor;
-import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import io.github.kongyu666.common.enums.AppCodeEnum;
 import io.github.kongyu666.common.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -40,28 +38,19 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 .excludePathPatterns("/actuator/**", "/demo/**")
         ;
     }
-
-    /**
-     * 注册 [Sa-Token 全局过滤器]
+    
+    /*
+    注册 Sa-Token 全局过滤器
      */
     @Bean
-    public FilterRegistrationBean<SaServletFilter> getSaServletFilter() {
-        FilterRegistrationBean<SaServletFilter> frBean = new FilterRegistrationBean<>();
-        frBean.setFilter(
-                new SaServletFilter()
-                        .addInclude("/actuator/**")
-                        .setAuth(obj -> {
-                            // 放开 /actuator/health 节点，其余接口需要基础验证
-                            SaRouter
-                                    .notMatch("/actuator/health")
-                                    .match("/actuator/**", () -> SaHttpBasicUtil.check("admin:Admin@123"));
-                        }).setError(e -> {
-                            log.error(e.getMessage());
-                            return Result.error(AppCodeEnum.OPERATION_CANCELED.getCode(), AppCodeEnum.OPERATION_CANCELED.getDescription());
-                        })
-        );
-        frBean.setOrder(-101);  // 更改顺序为 -101
-        return frBean;
+    public SaServletFilter getSaServletFilter() {
+        return new SaServletFilter()
+                .addInclude("/actuator/shutdown")
+                .setAuth(obj -> SaHttpBasicUtil.check("admin:Admin@123"))
+                .setError(e -> {
+                    log.error(e.getMessage());
+                    return Result.error(AppCodeEnum.OPERATION_CANCELED.getCode(), AppCodeEnum.OPERATION_CANCELED.getDescription());
+                });
     }
 
 }
